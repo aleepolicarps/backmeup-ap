@@ -1,7 +1,7 @@
 from datetime import datetime
 import json
 import logging
-import requests
+import urllib2
 import os
 import time
 
@@ -42,13 +42,13 @@ headers = {
 }
 
 # reference: https://www.dropbox.com/developers/documentation/http/documentation#files-upload
-response = requests.post('https://content.dropboxapi.com/2/files/upload', data=data, headers=headers)
-
-if response.status_code == 200:
+try:
+    request = urllib2.Request('https://content.dropboxapi.com/2/files/upload', data, headers)
+    f = urllib2.urlopen(request)
+    response = f.read()
     logging.info('Upload successful!')
     logging.info(response)
-    logging.info(response.content)
-else:
+except:
     logging.error('Upload unsuccessful!')
-    logging.error(response)
-    logging.error(response.content)
+finally:
+    f.close()
