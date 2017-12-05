@@ -26,7 +26,7 @@ with open(file_path, 'r') as f:
 
 # sets path in Dropbox
 timestamp = time.strftime('%Y-%m-%d-%I:%M')
-dropbox_path = '/%s/%s_%s.gz' % (config['app_name'], config['database'], timestamp)
+dropbox_path = '/%s/%s/%s_%s.gz' % (config['folder_name'], config['app_name'], config['database'], timestamp)
 
 dropbox_params = {
     'path': dropbox_path,
